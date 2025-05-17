@@ -18,6 +18,12 @@ counter = {}
 for file in desktop.iterdir():
     if file.is_file():  # Only count files, not folders
         ext = file.suffix.lower()
-        counter[ext] = counter.get(ext, 0) + 1
-# Move the screenshot there
-pprint.pprint(counter)
+        counter[ext] = counter.get(ext, 0) + 1 
+    elif file.is_dir():
+        # We'll use '<DIR>' as the key for directories
+        counter['<DIR>'] = counter.get('<DIR>', 0) + 1  
+
+# Sort the dictionary by key (file type)
+sorted_counter = dict(sorted(counter.items()))
+
+pprint.pprint(sorted_counter) 
