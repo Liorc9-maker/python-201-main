@@ -11,7 +11,7 @@ import pprint
 
 
 # Find the path to my Desktop
-desktop = pathlib.Path('/Users/liorc/Desktop')
+desktop = pathlib.Path('/mnt/c/Users/liorc/Desktop')
 counter = {}
 
 # Loop through items on the Desktop
@@ -29,6 +29,7 @@ sorted_counter = dict(sorted(counter.items()))
 pprint.pprint(sorted_counter) 
 
 # Create a file with the counting data.
-file_out = open("file_counter.txt", "w")
-file_out.write(f"{sorted_counter}")
+file_out = open("filecounts.txt", "a")
+file_out.write(str(sorted_counter))
+file_out.write("\n")
 file_out.close()
