@@ -27,3 +27,8 @@ for file in desktop.iterdir():
 sorted_counter = dict(sorted(counter.items()))
 
 pprint.pprint(sorted_counter) 
+
+# Create a file with the counting data.
+file_out = open("file_counter.txt", "w")
+file_out.write(f"{sorted_counter}")
+file_out.close()
