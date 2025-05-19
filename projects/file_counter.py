@@ -1,35 +1,34 @@
-# Add the code for the file counter script that you wrote in the course.
 import pathlib
 import pprint
-# To get that information, write a script that locates your Desktop, 
-# fetches all the files that are on there, 
-# and counts how many files of each different file type are on your desktop. 
-# Use a dictionary to collect this data, 
-# and print it to your console at the end in order to get an overview of what is there.
+import csv
+from pathlib import Path  # This was missing!
 
+# Step 1: Define the path to the Desktop
+desktop = Path("C:/Users/liorc/Desktop")  # Use Windows path format for consistency
 
-
-
-# Find the path to my Desktop
-desktop = pathlib.Path('/mnt/c/Users/liorc/Desktop')
+# Step 2: Count files by extension
 counter = {}
-
-# Loop through items on the Desktop
 for file in desktop.iterdir():
-    if file.is_file():  # Only count files, not folders
-        ext = file.suffix.lower()
-        counter[ext] = counter.get(ext, 0) + 1 
+    if file.is_file():
+        ext = file.suffix.lower() or "(no extension)"  # Handle files with no extension
+        counter[ext] = counter.get(ext, 0) + 1
     elif file.is_dir():
-        # We'll use '<DIR>' as the key for directories
-        counter['<DIR>'] = counter.get('<DIR>', 0) + 1  
+        counter['<DIR>'] = counter.get('<DIR>', 0) + 1
 
-# Sort the dictionary by key (file type)
+# Step 3: Sort and print
 sorted_counter = dict(sorted(counter.items()))
+pprint.pprint(sorted_counter)
 
-pprint.pprint(sorted_counter) 
+# Step 4: Prepare to write to CSV
+csv_path = Path("C:/Users/liorc/Desktop/filecounts.csv")
+write_headers = not csv_path.exists() or csv_path.stat().st_size == 0
 
-# Create a file with the counting data.
-file_out = open("filecounts.txt", "a")
-file_out.write(str(sorted_counter))
-file_out.write("\n")
-file_out.close()
+with csv_path.open("a", newline='') as csvfile:
+    writer = csv.writer(csvfile)
+
+    # Write headers (keys) if file is new/empty
+    if write_headers:
+        writer.writerow(sorted_counter.keys())
+
+    # Write one row of values (counts)
+    writer.writerow(sorted_counter.values())
