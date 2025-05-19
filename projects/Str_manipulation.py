@@ -1,13 +1,14 @@
-import pathlib
+from pathlib import Path
+import ast
 
+# Define the path using pathlib
+file_path = Path(r"C:\Users\liorc\Desktop\filecounts.txt")
 
-desktop = pathlib.Path('/mnt/c/Users/liorc/Desktop')
+# Read the file
+contents = file_path.read_text().strip()
 
-file_in = open("filecounts.txt", "r")
-contents = file_in.read()
+# Parse the string as a dictionary
+data = ast.literal_eval(contents)
 
-
-for file in file_in:
-    if file.suffix().lower() == ".png":
-        print(file)
-file_in.close()
+key = '.jpg'
+print(f"Key: {key}, Value: {data[key]}")
