@@ -4,7 +4,7 @@ from pathlib import Path
 
 count = {"": 8, ".csv": 2, ".md": 2, ".png": 11}
 
-file_path = Path("C:/Users/liorc/Desktop/filecounts.csv")
+file_path = Path(__file__).parent / "filecounts.csv"
 
 # Check if file exists and is empty (or doesn't exist yet)
 write_headers = not file_path.exists() or file_path.stat().st_size == 0

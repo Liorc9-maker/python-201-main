@@ -1,10 +1,10 @@
 import pathlib
 import pprint
 import csv
-from pathlib import Path  # This was missing!
+from pathlib import Path  
 
 # Step 1: Define the path to the Desktop
-desktop = Path("C:/Users/liorc/Desktop")  # Use Windows path format for consistency
+desktop = Path("C:/Users/liorc/Desktop")  
 
 # Step 2: Count files by extension
 counter = {}
@@ -20,7 +20,7 @@ sorted_counter = dict(sorted(counter.items()))
 pprint.pprint(sorted_counter)
 
 # Step 4: Prepare to write to CSV
-csv_path = Path("C:/Users/liorc/Desktop/filecounts.csv")
+csv_path = Path(__file__).parent /"filecounts.csv"
 write_headers = not csv_path.exists() or csv_path.stat().st_size == 0
 
 with csv_path.open("a", newline='') as csvfile:

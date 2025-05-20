@@ -3,7 +3,7 @@
 import csv
 from pathlib import Path
 
-file_path = Path("C:/Users/liorc/Desktop/filecounts.csv")
+file_path = Path(__file__).parent /"filecounts.csv"
 
 with file_path.open("r", newline = '') as csvfile:
     reader = csv.DictReader(csvfile, fieldnames=["Folder", "CSV", "MD", "PNG"])
