@@ -10,4 +10,6 @@ def greet(greeting, name):
     """
     sentence = f"{greeting}, {name}! How are you?"
     return sentence
-print(greet.__doc__)
+greeting_input = input("Please type in your greeting: ")
+name_input = input("Please type in a name: ")
+print(greet(greeting_input, name_input))
