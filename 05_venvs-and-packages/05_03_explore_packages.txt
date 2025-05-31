@@ -2,7 +2,15 @@ Do an online search for interesting Python packages on PyPI.
 You can search for something you're interested to do with your programming
 skills and add "Python package" to the search query.
 - What do you find?
+
+I've found many interesting packages but thoght
+since I already have Django installed maybe I'll try to go through the getting started tuturial.
+I will definitley finish it sometime but meanwhile... I found pyjokes and rich.
+
 - Create a new virtual environment and install the package.
 - Check out its documentation and their "Getting Started" guide
   and code examples, if there are any.
 - Can you get some basic functionality of the package to work locally?
+
+I made a joke bot there is a copy in the projects folder.
+
