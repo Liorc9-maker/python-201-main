@@ -4,6 +4,8 @@
 # print statement. You can't remove any code in `cook.py`,
 # but you can add code.
 
+# added if __name__ == "__main__":
+
 from codingnomads.cook import soup
 
 print(f"I like {soup}.")
