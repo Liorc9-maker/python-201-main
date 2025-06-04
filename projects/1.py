@@ -1,2 +1,2 @@
 greet = "Hello, world!"
-print(greet)
+print(f"{greet}")
