@@ -1,22 +1,38 @@
 import requests
-
-min_len = 4
-max_len = 6
-URL = f"https://uzby.com/api.php?min={min_len}&max={max_len}"
-
-response = requests.get(URL)
-game_name = response.text
-
-response_quote = requests.get("https://zenquotes.io/api/random")
-data = response_quote.json()
-
-quote = data[0]['q']
-author = data[0]['a']
-
-
 import random
 import json
 import os
+
+def setup_game_name_and_quote():
+    global game_name, quote, author
+    while True:
+        internet_on = input("Do you have an internet connection?\nType 1 for yes or 2 for no: ")
+
+        if internet_on == "1":
+            try:
+                min_len = 4
+                max_len = 6
+                URL = f"https://uzby.com/api.php?min={min_len}&max={max_len}"
+                response = requests.get(URL)
+                game_name = response.text
+
+                response_quote = requests.get("https://zenquotes.io/api/random")
+                data = response_quote.json()
+
+                quote = data[0]['q']
+                author = data[0]['a']
+                break
+            except requests.RequestException as e:
+                print("Error fetching data. Please check your connection.")
+                print(e)
+        elif internet_on == "2":
+            print("Skipping online features. No random name or quote will be used.")
+            game_name = "Sreenath"
+            quote = "Even a broken watch is correct twice a day."
+            author = "Brian Selznick"
+            break
+        else:
+            print("Invalid choice. Please type 1 or 2.")
 
 # --- Constants ---
 door_options = {"left", "right", "forward", "armory", "cave"}
@@ -227,7 +243,8 @@ def main():
        Calls the function for that room.
        saves the game after that action.
        Loads the game state.
-    """
+   """
+    setup_game_name_and_quote()
     load_game()
     while True:
         direction = prompt_direction()
